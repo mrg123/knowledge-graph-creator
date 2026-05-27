@@ -1,6 +1,6 @@
 # Knowledge Graph Creator — 知识图谱生成器
 
-一个为 TRAE SOLO 打造的**代码知识图谱 Skill**，自动扫描项目文件、分析关联关系、生成交互式 D3.js 力导向图 HTML。
+一个为 TRAE SOLO 打造的**代码知识图谱 Skill**，自动扫描项目文件、分析关联关系、提取函数注释、生成交互式 D3.js 力导向图 HTML。
 
 ## 能做什么？
 
@@ -10,18 +10,22 @@
 
 AI 会自动：
 1. 扫描项目所有源代码和文档
-2. 分析 import、extends、implements 等关联关系
-3. 生成交互式 HTML 知识图谱（双击即用）
+2. 判断项目类型（代码/文档/配置/混合）
+3. 分析 import/extends/Markdown链接 等关联关系
+4. **提取函数/类注释**填充节点描述
+5. 生成交互式 HTML 知识图谱（双击即用）
 
 ## 支持的文件类型
 
-Python / JavaScript / TypeScript / Java / Go / Rust / Markdown / JSON / YAML / Vue / PHP / Ruby / C/C++ / C# / Kotlin / Swift 等 20+ 种格式。
+Python / JavaScript / TypeScript / Java / Go / Rust / Markdown / JSON / YAML / Vue / PHP / Ruby / C/C++ / C# / Kotlin / Swift 等 30+ 种格式。
 
-自动跳过 `.git`、`node_modules`、`dist`、`build`、`.venv` 等隐藏目录和无关目录。
+自动跳过 `.git`、`node_modules`、`dist`、`build`、`.venv` 等隐藏/无关目录。
+
+## 非代码项目同样支持
+
+纯文档项目（Wiki/知识库）、配置文件仓库、设计文档库——按目录层级 + 内部交叉引用构建关系图谱，无需 import 语句也能出图。
 
 ## 输出效果
-
-![知识图谱示意图](https://d3js.org/logo.svg)
 
 生成的 HTML 知识图谱包含 **10 项交互功能**：
 - 力导向布局，节点自动排布
@@ -29,7 +33,7 @@ Python / JavaScript / TypeScript / Java / Go / Rust / Markdown / JSON / YAML / V
 - 节点拖拽固定位置
 - 悬停邻居高亮
 - 名称搜索定位
-- 节点详情面板
+- 节点详情面板（展示注释内容、函数/类定义列表）
 - 分组图例
 - 边关系标签
 - 侧边栏节点列表
@@ -56,7 +60,7 @@ cp SKILL.md ~/.trae-cn/skills/knowledge-graph-creator/
 
 > "看看 Controller 和 Service 之间怎么关联的"
 
-> "分析架构关系，输出 HTML 图"
+> "分析这个文档项目的目录结构"
 
 > "帮我画个依赖关系图"
 
@@ -64,7 +68,11 @@ cp SKILL.md ~/.trae-cn/skills/knowledge-graph-creator/
 
 这是为 **TRAE SOLO 技能创作赛** 准备的作品。核心思路是：**让 AI 不仅能理解代码，还能把代码之间的关系可视化出来**。
 
-传统查看项目架构需要手动翻文件、画架构图，每次项目变动就要重画。这个 Skill 把整个过程自动化了——输入自然语言，输出交互式图谱。
+相比手动画架构图，这个 Skill 的优势在于：
+- **自动化**：一句话完成扫描→分析→渲染全流程
+- **注释提取**：不止显示文件名，还显示每个模块的功能说明
+- **非代码项目兼容**：纯文档项目也能出知识图谱
+- **交互式**：不是静态图片，可搜索、点击、缩放
 
 ## 许可
 
